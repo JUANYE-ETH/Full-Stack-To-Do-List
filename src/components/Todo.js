@@ -8,7 +8,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
 		id: null,
 		value: "",
 	});
-
+	console.log(todos.name)
 	function submitUpdate(value) {
 		updateTodo(edit.id, value);
 		setEdit({

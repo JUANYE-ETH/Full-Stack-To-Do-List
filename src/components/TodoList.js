@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Todo from "./Todo";
 import TodoForm from "./TodoForm";
 
 function TodoList() {
 	const [todos, setTodos] = useState([]);
+
+	useEffect(() => {
+		fetch("http://localhost:9292/todolist")
+			.then((res) => res.json())
+			.then((todos) => setTodos(todos));
+	}, []);
 
 	function addTodo(todo) {
 		if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -43,7 +49,7 @@ function TodoList() {
 		<div>
 			<h1>What's the agenda for Today?</h1>
 			<TodoForm onSubmit={addTodo} />
-			<Todo
+			<Todo 
 				todos={todos}
 				completeTodo={completeTodo}
 				removeTodo={removeTodo}
