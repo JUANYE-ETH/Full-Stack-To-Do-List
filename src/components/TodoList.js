@@ -29,6 +29,8 @@ function TodoList() {
 		);
 	}
 
+	const [editObject, setEditObject] = useState({ edit: false });
+
 	function removeTodo(id) {
 		const removeArr = [...todos].filter((todo) => todo.id !== id);
 
@@ -48,12 +50,16 @@ function TodoList() {
 	return (
 		<div>
 			<h1>What's the agenda for Today?</h1>
-			<TodoForm onSubmit={addTodo} />
+			<TodoForm
+				updateTodo={updateTodo}
+				editObject={editObject}
+				onSubmit={addTodo}
+			/>
 			<Todo
+				setEditObject={setEditObject}
 				todos={todos}
 				completeTodo={completeTodo}
 				removeTodo={removeTodo}
-				updateTodo={updateTodo}
 			/>
 		</div>
 	);

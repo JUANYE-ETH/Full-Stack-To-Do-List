@@ -131,6 +131,10 @@ h1 {
   width: 90%;
 }
 
+.todo-row:active {
+  transform: translateY(4px);
+}
+
 .todo-row:nth-child(4n + 1) {
   background: linear-gradient(
     90deg,
@@ -167,7 +171,11 @@ h1 {
   color: #fff;
 }
 
-.delete-icon:active {
+/* .delete-icon:active {
+  transform: translateY(4px);
+} */
+
+.delete-icon:hover {
   transform: translateY(4px);
 }
 
@@ -175,6 +183,10 @@ h1 {
   color: #fff;
 }
 
-.edit-icon:active {
+/* .edit-icon:active {
+  transform: translateY(6px);
+} */
+
+.edit-icon:hover {
   transform: translateY(4px);
 }
