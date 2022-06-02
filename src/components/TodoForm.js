@@ -41,22 +41,48 @@ function TodoForm(props) {
 						onChange={handleChange}
 						ref={inputRef}
 					/>
+					<input
+						type="text"
+						placeholder="Category"
+						value={input}
+						name="text"
+						className="todo-input category"
+						onChange={handleChange}
+					/>
 					<button className="todo-button edit">Update</button>
 				</>
 			) : (
 				<>
 					<input
 						type="text"
-						placeholder="Write a todo"
+						placeholder="Type a todo"
 						value={input}
 						name="text"
 						className="todo-input"
 						onChange={handleChange}
 						ref={inputRef}
 					/>
+					<input
+						type="text"
+						placeholder="Category"
+						value={input}
+						name="text"
+						className="todo-input category"
+						onChange={handleChange}
+					/>
 					<button className="todo-button">Add new todo</button>
+					{/* <button className="todo-button">Add new todo</button> */}
 				</>
 			)}
+			{/* <input
+				type="text"
+				placeholder="Category"
+				value={input}
+				name="text"
+				className="todo-input category"
+				onChange={handleChange}
+			/>
+			<button className="todo-button">Add new todo</button> */}
 		</form>
 	);
 }
