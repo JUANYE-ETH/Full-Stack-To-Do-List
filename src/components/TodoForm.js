@@ -2,15 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 
 function TodoForm(props) {
 	console.log(props);
-	const [id, text, category] = props.editObject.edit
-		? props.editObject
-		: { id: "", text: "", category: {} };
+	const [text, setText] = useState(props.edit ? props.edit.text : "");
+	const [category, setCategory] = useState(
+		props.edit ? props.edit.category : {}
+	);
+	const [id, setId] = useState(props.edit ? props.edit.id : 0);
 
-	const [input, setInput] = useState({
-		id: id,
-		text: text,
-		category: category,
-	});
+	const [allCategories, setAllCategories] = useState([]);
+
+	useEffect(() => {
+		fetch("http://localhost:9292/categories")
+			.then((response) => response.json())
+			.then(setAllCategories);
+	}, []);
 
 	// const [id, setId] = useState(0);
 	// const giveId = () => {
@@ -26,6 +30,14 @@ function TodoForm(props) {
 
 	function handleSubmit(e) {
 		e.preventDefault();
+		const obj = { text: text, category_id: category.id };
+		fetch(`http://localhost:9292/todos/${id}`, {
+			method: "PATCH",
+			headers: {
+				contentType: "application/json",
+			},
+			body: JSON.stringify(obj),
+		});
 
 		// props.onSubmit({
 		// 	id: giveId(),
@@ -34,9 +46,9 @@ function TodoForm(props) {
 		// setInput("");
 	}
 
-	function handleChange(e) {
-		setInput({ [e.target.name]: e.target.value });
-	}
+	// function handleChange(e) {
+	// 	setInput({ [e.target.name]: e.target.value });
+	// }
 
 	return (
 		<form className="todo-form" onSubmit={handleSubmit}>
@@ -45,20 +57,19 @@ function TodoForm(props) {
 					<input
 						type="text"
 						placeholder="Update your todo"
-						value={input.text || props.editObject.text}
+						value={text}
 						name="text"
 						className="todo-input edit"
-						onChange={handleChange}
+						onChange={(e) => setText(e.target.value)}
 						ref={inputRef}
 					/>
-					<input
-						type="text"
-						placeholder="Category"
-						value={input.category}
-						name="category"
-						className="todo-input category"
-						onChange={handleChange}
-					/>
+					<label for="Categories">Choose a category:</label>
+					<select name="category" id="category">
+						<option> -- select an option -- </option>
+						{allCategories.map((category) => (
+							<option value={category.id}>{category.name}</option>
+						))}
+					</select>
 					<button className="todo-button edit">Update</button>
 				</>
 			) : (
@@ -66,22 +77,28 @@ function TodoForm(props) {
 					<input
 						type="text"
 						placeholder="Type a todo"
-						value={input.todo}
+						value={text}
 						name="todo"
 						className="todo-input"
-						onChange={handleChange}
+						onChange={(e) => setText(e.target.value)}
 						ref={inputRef}
 					/>
+					<label for="Categories">Choose a category:</label>
+					<select name="category" id="category">
+						<option> -- select an option -- </option>
+						{allCategories.map((category) => (
+							<option value={category.id}>{category.name}</option>
+						))}
+					</select>
 					<input
 						type="text"
 						placeholder="Category"
-						value={input.category}
+						value={category}
 						name="category"
 						className="todo-input category"
-						onChange={handleChange}
+						onChange={(e) => setCategory(e.target.value)}
 					/>
 					<button className="todo-button">Add new todo</button>
-					{/* <button className="todo-button">Add new todo</button> */}
 				</>
 			)}
 			{/* <input

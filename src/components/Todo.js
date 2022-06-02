@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import TodoForm from "./TodoForm";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
-function Todo({ todos, completeTodo, removeTodo, setEditObject }) {
+function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
+	const [edit, setEdit] = useState({
+		id: null,
+		text: "",
+		category: {},
+	});
+	console.log(todos.name);
+	function submitUpdate(value) {
+		updateTodo(edit.id, value);
+		setEdit({
+			id: null,
+			text: "",
+			category: {},
+		});
+	}
+
+	if (edit.id) {
+		return <TodoForm edit={edit} onSubmit={submitUpdate} />;
+	}
+
 	return todos.map((todo, index) => (
 		<div
 			className={todo.isComplete ? "todo-row complete" : "todo-row"}
@@ -18,12 +38,7 @@ function Todo({ todos, completeTodo, removeTodo, setEditObject }) {
 				/>
 				<TiEdit
 					onClick={() =>
-						setEditObject({
-							id: todo.id,
-							text: todo.text,
-							category: todo.category,
-							edit: true,
-						})
+						setEdit({ id: todo.id, text: todo.text, category: todo.category })
 					}
 					className="edit-icon"
 				/>
