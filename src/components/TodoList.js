@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Todo from "./Todo";
 import TodoForm from "./TodoForm";
+import CategoryForm from "./CategoryForm";
 
-function TodoList() {
+function TodoList({handleSubmit}) {
 	const [todos, setTodos] = useState([]);
+	// const [category, setCategory] = useState(
+	// 	props.edit ? props.edit.category : {}
+	// );
+	// const [id, setId] = useState(props.edit ? props.edit.id : "");
+	const [text, setText] = useState("")
+	const [category, setCategory] = useState("")
+	
 
 	useEffect(() => {
 		fetch("http://localhost:9292/todos")
@@ -11,13 +19,27 @@ function TodoList() {
 			.then((todos) => setTodos(todos));
 	}, []);
 
-	function addTodo(todo) {
-		if (!todo.text || /^\s*$/.test(todo.text)) {
-			return;
-		}
-		const newTodos = [todo, ...todos];
+	function addTodo(todo, e) {
+		debugger
+		e.preventDefault();
+    fetch("http://localhost:9292/todos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: text,
+        category_id: category.id
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => setTodos(data));
+		// if (!todo.text || /^\s*$/.test(todo.text)) {
+		// 	return;
+		// }
+		// const newTodos = [todo, ...todos];
 
-		setTodos(newTodos);
+		// setTodos(newTodos);
 	}
 
 	function updateTodo(todoId, newValue) {
@@ -31,10 +53,16 @@ function TodoList() {
 
 	const [editObject, setEditObject] = useState({ edit: false });
 
-	function removeTodo(id) {
-		const removeArr = [...todos].filter((todo) => todo.id !== id);
+	function removeTodo(id, e) {
+		// e.preventDefault();
+		fetch(`http://localhost:9292/todos/${id}`, {
+			method: 'DELETE',
+		})
+		.then(response => response.json())
+		.then(data => setTodos(data))
+		// const removeArr = [...todos].filter((todo) => todo.id !== id);
 
-		setTodos(removeArr);
+		// setTodos(removeArr);
 	}
 
 	const completeTodo = (id) => {
@@ -50,6 +78,8 @@ function TodoList() {
 	return (
 		<div>
 			<h1>What's the agenda for Today?</h1>
+			<CategoryForm 
+				onSubmit={handleSubmit}/>
 			<TodoForm
 				updateTodo={updateTodo}
 				editObject={editObject}

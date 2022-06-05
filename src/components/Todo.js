@@ -9,7 +9,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
 		text: "",
 		category: {},
 	});
-	console.log(todos.name);
+	// console.log(todos.name);
 	function submitUpdate(value) {
 		updateTodo(edit.id, value);
 		setEdit({
