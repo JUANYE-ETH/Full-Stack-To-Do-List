@@ -3,15 +3,14 @@ import Todo from "./Todo";
 import TodoForm from "./TodoForm";
 import CategoryForm from "./CategoryForm";
 
-function TodoList({handleSubmit}) {
+function TodoList({ handleSubmit }) {
 	const [todos, setTodos] = useState([]);
 	// const [category, setCategory] = useState(
 	// 	props.edit ? props.edit.category : {}
 	// );
 	// const [id, setId] = useState(props.edit ? props.edit.id : "");
-	const [text, setText] = useState("")
-	const [category, setCategory] = useState("")
-	
+	const [text, setText] = useState("");
+	const [category, setCategory] = useState("");
 
 	useEffect(() => {
 		fetch("http://localhost:9292/todos")
@@ -20,20 +19,20 @@ function TodoList({handleSubmit}) {
 	}, []);
 
 	function addTodo(todo, e) {
-		debugger
+		// debugger;
 		e.preventDefault();
-    fetch("http://localhost:9292/todos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        text: text,
-        category_id: category.id
-      }),
-    })
-      .then((r) => r.json())
-      .then((data) => setTodos(data));
+		fetch("http://localhost:9292/todos", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				text: text,
+				category_id: category.id,
+			}),
+		})
+			.then((r) => r.json())
+			.then((data) => setTodos(data));
 		// if (!todo.text || /^\s*$/.test(todo.text)) {
 		// 	return;
 		// }
@@ -56,10 +55,10 @@ function TodoList({handleSubmit}) {
 	function removeTodo(id, e) {
 		// e.preventDefault();
 		fetch(`http://localhost:9292/todos/${id}`, {
-			method: 'DELETE',
+			method: "DELETE",
 		})
-		.then(response => response.json())
-		.then(data => setTodos(data))
+			.then((response) => response.json())
+			.then((data) => setTodos(data));
 		// const removeArr = [...todos].filter((todo) => todo.id !== id);
 
 		// setTodos(removeArr);
@@ -78,8 +77,7 @@ function TodoList({handleSubmit}) {
 	return (
 		<div>
 			<h1>What's the agenda for Today?</h1>
-			<CategoryForm 
-				onSubmit={handleSubmit}/>
+			<CategoryForm onSubmit={handleSubmit} />
 			<TodoForm
 				updateTodo={updateTodo}
 				editObject={editObject}
