@@ -77,7 +77,6 @@ function TodoList({ handleSubmit }) {
 	return (
 		<div>
 			<h1>What's the agenda for Today?</h1>
-			<CategoryForm onSubmit={handleSubmit} />
 			<TodoForm
 				updateTodo={updateTodo}
 				editObject={editObject}
@@ -89,6 +88,7 @@ function TodoList({ handleSubmit }) {
 				completeTodo={completeTodo}
 				removeTodo={removeTodo}
 			/>
+			<CategoryForm onSubmit={handleSubmit} />
 		</div>
 	);
 }

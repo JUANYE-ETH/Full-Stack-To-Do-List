@@ -33,22 +33,22 @@ const CategoryForm = ({ onAddCategory }) => {
 	};
 
 	return (
-		<div>
-			<section>
-				<form className="form" autoComplete="off" onSubmit={handleSubmit}>
-					<h3>Add New Category</h3>
-					<label htmlFor="name">Name</label>
-					<input
-						type="text"
-						id="name"
-						name="name"
-						onChange={handleChange}
-						value={formData.name}
-					/>
-					<button type="submit">Add Category</button>
-				</form>
-			</section>
-		</div>
+		<section>
+			<form className="form" autoComplete="off" onSubmit={handleSubmit}>
+				<input
+					type="text"
+					id="category-input"
+					name="name"
+					placeholder="Type new category"
+					onChange={handleChange}
+					value={formData.name}
+				/>
+
+				<button type="submit" class="category-button">
+					Add new category to list
+				</button>
+			</form>
+		</section>
 	);
 };
 

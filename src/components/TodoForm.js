@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 
 function TodoForm(props) {
 	// console.log(props);
@@ -95,13 +94,12 @@ function TodoForm(props) {
 								onChange={(e) => setText(e.target.value)}
 								ref={inputRef}
 							/>
-							<label for="Categories">Choose a category:</label>
 							<select
 								name="category"
 								id="category"
 								onChange={(e) => handleCategoryChange(e)}
 							>
-								<option> -- select an option -- </option>
+								<option> -- Chose a category -- </option>
 								{allCategories.map((category) => (
 									<option value={category.id}>{category.name}</option>
 								))}
@@ -119,13 +117,12 @@ function TodoForm(props) {
 								onChange={(e) => setText(e.target.value)}
 								ref={inputRef}
 							/>
-							<label for="Categories">Choose a category:</label>
 							<select
 								name="category"
 								id="category"
 								onChange={(e) => handleCategoryChange(e)}
 							>
-								<option> -- select an option -- </option>
+								<option> --- Chose a category --- </option>
 								{allCategories.map((category) => (
 									<option value={category.id}>{category.name}</option>
 								))}
