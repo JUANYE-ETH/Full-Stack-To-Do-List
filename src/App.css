@@ -56,6 +56,33 @@ h1 {
   color: #e2e2e2;
 }
 
+#category-input {
+  padding: 14px 32px 14px 16px;
+  border-radius: 4px 4px 4px 4px;
+  border: 2px solid #5d0cff;
+  outline: none;
+  width: 320px;
+  background: transparent;
+  color: #fff;
+  margin-right: 8px;
+  margin-top: 15px;
+}
+
+#category-input::placeholder {
+  color: #e2e2e2;
+}
+
+#category {
+  padding: 14px 32px 14px 16px;
+  border-radius: 4px 4px 4px 4px;
+  border: 2px solid #5d0cff;
+  outline: none;
+  width: 320px;
+  background: transparent;
+  color: #fff;
+  margin-right: 8px;
+}
+
 .todo-button {
   padding: 16px;
   border: none;
@@ -76,6 +103,31 @@ h1 {
 }
 
 .todo-button:active {
+  background-color: #6f53c2;
+  box-shadow: 0 5px black;
+  transform: translateY(4px);
+}
+
+.category-button {
+  padding: 16px;
+  border: none;
+  border-radius: 4px 4px 4px 4px;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgba(93, 12, 255, 1) 0%,
+    rgba(155, 0, 250, 1) 100%
+  );
+  color: #fff;
+  transition-duration: .2s;
+}
+
+.category-button:hover {
+  background: #6f53c2E3;
+}
+
+.category-button:active {
   background-color: #6f53c2;
   box-shadow: 0 5px black;
   transform: translateY(4px);
@@ -131,6 +183,10 @@ h1 {
   width: 90%;
 }
 
+.todo-row:active {
+  transform: translateY(4px);
+}
+
 .todo-row:nth-child(4n + 1) {
   background: linear-gradient(
     90deg,
@@ -167,7 +223,11 @@ h1 {
   color: #fff;
 }
 
-.delete-icon:active {
+/* .delete-icon:active {
+  transform: translateY(4px);
+} */
+
+.delete-icon:hover {
   transform: translateY(4px);
 }
 
@@ -175,6 +235,10 @@ h1 {
   color: #fff;
 }
 
-.edit-icon:active {
+/* .edit-icon:active {
+  transform: translateY(6px);
+} */
+
+.edit-icon:hover {
   transform: translateY(4px);
 }
