@@ -9,8 +9,8 @@ function TodoList({ handleSubmit }) {
 	// 	props.edit ? props.edit.category : {}
 	// );
 	// const [id, setId] = useState(props.edit ? props.edit.id : "");
-	const [text, setText] = useState("");
-	const [category, setCategory] = useState("");
+	const text = useState("");
+	const category = useState("");
 
 	useEffect(() => {
 		fetch("http://localhost:9292/todos")
